@@ -1,13 +1,9 @@
 const key = 'd6s809afdas89ffdsa7890'
 
-const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=get_posts`
-
-fetch(url).then((res) => {
-    console.log(res)
-})
-
-export async function get_posts() {
+export async function set_users(user, pass) {
     try{
+        const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=set_users&user=${user}&pass=${pass}`
+
         const response = await fetch(url);
         if(!response.ok){
             throw new Error('Failed to resposta')

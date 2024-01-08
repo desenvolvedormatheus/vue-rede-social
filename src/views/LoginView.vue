@@ -59,8 +59,8 @@ export default {
         Button,
         Message,
     },
-
 }
+
 </script>
 
 <style scoped>
