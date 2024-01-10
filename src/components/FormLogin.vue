@@ -53,9 +53,8 @@ export default {
                 console.log(user);
                 if(user[0].log === 'true'){
                     window.localStorage.setItem("session_code", user[0].user.session_code)
-                    // window.localStorage.removeItem("session_code")
                     this.$router.push("/feed")
-                }user[user.length - 1]
+                }
             } catch (error) {
                 this.notUser = true;
                 console.log('Usuario não encontrado');

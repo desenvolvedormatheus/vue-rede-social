@@ -11,6 +11,16 @@ const routes = [
     path: '/feed',
     name: 'feed',
     component: () => import('../views/feedView.vue')
+  },
+  {
+    path: '/notLogin',
+    name: 'notLogin',
+    component: () => import('../views/notLoginView.vue')
+  },
+  {
+    path: '/Error',
+    name: 'Error',
+    component: () => import('../views/ErrorView.vue')
   }
 ]
 
