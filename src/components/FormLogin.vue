@@ -11,7 +11,7 @@
             <InputGroupAddon>
                 <i class="pi pi-lock"></i>
             </InputGroupAddon>
-            <Password :feedback="false" placeholder="Password" v-model="inputPass" />
+            <Password id="inputPass" :feedback="false" placeholder="Password" v-model="inputPass" />
         </InputGroup>
         <Button label="LOGIN" @click="checkUser(inputUser, inputPass)"></Button>
         <p v-show="notUser" class="alert_notUser">Usuário não encontrado!</p>
@@ -51,12 +51,15 @@ export default {
             try {
                 const user = await get_users(inputUser, inputPass);
                 console.log(user);
-                if(user[user.length - 1].log === 'true'){
+                if(user[0].log === 'true'){
+                    window.localStorage.setItem("session_code", user[0].user.session_code)
+                    // window.localStorage.removeItem("session_code")
                     this.$router.push("/feed")
-                }
+                }user[user.length - 1]
             } catch (error) {
                 this.notUser = true;
                 console.log('Usuario não encontrado');
+                document.querySelector("i").setAttribute("color", "red");
             }
         }
     }
@@ -73,6 +76,6 @@ export default {
     width: 20rem;
 }
 .alert_notUser{
-    color: rgb(255, 86, 86);
+    color: #ff5656;
 }
 </style>

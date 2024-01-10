@@ -21,6 +21,8 @@
             <Password :feedback="false" placeholder="Confirm password" v-model="inputPassConform"/>
         </InputGroup>
         <Button label="CREATE" @click="checkUser(inputUser, inputPass)"></Button>
+        <p id="alert" v-show="alertShow">{{ alert }}</p>
+        <p id="alertCreate" v-show="alertShowCreate">Usuário criado!</p>
     </div>
 </template>
 
@@ -41,6 +43,9 @@ export default {
             inputUser: '',
             inputPass: '',
             inputPassConform: '',
+            alertShow: false,
+            alert: 'a',
+            alertShowCreate: false,
         }
     },
     components: {
@@ -54,20 +59,33 @@ export default {
         async checkUser(inputUser, inputPass) {
 
             // checar confirmação de senha
-
-            console.log(inputUser, inputPass)
-            try {
-                const user = await set_users(inputUser, inputPass);
-                console.log(user);
-                if(user.have === true){
-                    this.$router.push("/feed")
+            if(this.inputPassConform === this.inputPass){
+                try {
+                    const user = await set_users(inputUser, inputPass);
+                    console.log(user);
+                    if(user.have === 'true'){
+                        this.alertShowCreate = false
+                        this.alertShow = true
+                        this.alert = 'Usuário já existe!'
+                    }else if (user.have === 'new'){
+                        this.alertShowCreate = true
+                        this.alertShow = false
+                    }else if (user.have === 'empy'){
+                        this.alertShowCreate = false
+                        this.alertShow = true
+                        this.alert = 'Usuário ou senha não podem estar vazios!'
+                    }
+                } catch (error) {
+                    console.log('erro, contate o administrador! ' + error);
                 }
-            } catch (error) {
-                console.log('erro, contate o administrador! ' + error);
+            }else{
+                this.alertShow = true,
+                this.alert = 'Senhas não conferem!'
             }
         }
     }
 }
+
 </script>
 
 <style scoped>
@@ -78,5 +96,11 @@ export default {
     align-items: center;
     justify-content: center;
     width: 20rem;
+}
+#alert{
+    color: #ff5656;
+}
+#alertCreate{
+    color: #93c5fd;
 }
 </style>

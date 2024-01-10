@@ -1,4 +1,4 @@
-<template>
+<template class="template">
     <Message :closable="false">
         <template #messageicon>
             <i></i>
@@ -14,7 +14,11 @@
                     <Button label="LOGIN" @click="log()"></Button>
                 </div>
             </div>
-            <Divider layout="vertical" class="divider"><b>OR</b></Divider>
+            <div class="divider">
+                <div class="row"></div>
+                <p>OR</p>
+                <div class="row"></div>
+            </div>
             <div>
                 <div class="LoginView-formLogin-titleGroup">
                     <h1>Create Account!</h1>
@@ -46,10 +50,12 @@ export default {
     },
     methods: {
         log() {
-            this.register = false; this.login = true;
+            this.register = false;
+            this.login = true;
         },
         reg() {
-            this.login = false; this.register = true;
+            this.login = false;
+            this.register = true;
         }
     },
     components: {
@@ -59,6 +65,9 @@ export default {
         Button,
         Message,
     },
+    mounted(){
+        document.getElementById("app").style.margin = 'auto'
+    }
 }
 
 </script>
@@ -68,17 +77,38 @@ export default {
     display: flex;
     flex-direction: row;
 }
+
 .LoginView-form div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .divider {
     margin: 0 3rem;
 }
+
+.divider p {
+    margin: 2rem 0;
+}
+
+.row {
+    height: 80%;
+    width: 1px;
+    border-radius: 10px;
+    background: #ffffff;
+    opacity: 0.1;
+}
+
 .LoginView-formLogin-titleGroup {
     text-align: center;
     margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 860px) {
+    .LoginView-form {
+        flex-direction: column;
+    }
 }
 </style>

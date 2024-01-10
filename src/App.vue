@@ -17,10 +17,6 @@ body {
   height: 100vh;
 }
 
-#app {
-  margin: auto;
-}
-
 h1, p{
   padding: 0;
   margin: 0;
