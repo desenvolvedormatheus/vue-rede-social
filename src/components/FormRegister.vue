@@ -114,9 +114,9 @@ export default {
     width: 20rem;
 }
 #alert{
-    color: #ff5656;
+    color: var(--secondary-color);
 }
 #alertCreate{
-    color: #93c5fd;
+    color: var(--primary-color);
 }
 </style>

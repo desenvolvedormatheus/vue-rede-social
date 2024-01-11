@@ -7,6 +7,12 @@
    font-family: 'nunito';
    src: url('./assets/fonts/Nunito/Nunito-VariableFont_wght.ttf');
 }
+
+:root{
+  --primary-color: #93c5fd;
+  --secondary-color: #ff5656;
+}
+
 *{
   font-family: nunito;
 }
