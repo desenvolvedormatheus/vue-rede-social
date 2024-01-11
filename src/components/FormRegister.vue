@@ -20,7 +20,7 @@
             </InputGroupAddon>
             <Password :feedback="false" placeholder="Confirm password" v-model="inputPassConform"/>
         </InputGroup>
-        <Button label="CREATE" @click="checkUser(inputUser, inputPass)"></Button>
+        <Button id="btnCreate" label="" @click="checkUser(inputUser, inputPass)">CREATE</Button>
         <p id="alert" v-show="alertShow">{{ alert }}</p>
         <p id="alertCreate" v-show="alertShowCreate">Usuário criado!</p>
     </div>
@@ -57,6 +57,9 @@ export default {
     },
     methods: {
         async checkUser(inputUser, inputPass) {
+            const btnCreate = document.querySelector("#btnCreate");
+            btnCreate.setAttribute("disabled", "");
+            btnCreate.innerHTML = `<i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>`
 
             // checar confirmação de senha
             if(this.inputPassConform === this.inputPass){
@@ -67,20 +70,33 @@ export default {
                         this.alertShowCreate = false
                         this.alertShow = true
                         this.alert = 'Usuário já existe!'
+                        btnCreate.removeAttribute("disabled");
+                        btnCreate.innerHTML = `CREATE`
                     }else if (user.have === 'new'){
                         this.alertShowCreate = true
                         this.alertShow = false
+                        btnCreate.removeAttribute("disabled");
+                        btnCreate.innerHTML = `CREATE`
                     }else if (user.have === 'empy'){
                         this.alertShowCreate = false
                         this.alertShow = true
                         this.alert = 'Usuário ou senha não podem estar vazios!'
+                        btnCreate.removeAttribute("disabled");
+                        btnCreate.innerHTML = `CREATE`
                     }
                 } catch (error) {
                     console.log('erro, contate o administrador! ' + error);
+                    this.alertShowCreate = false
+                    this.alertShow = true
+                    this.alert = 'contate o administrador!'
+                    btnCreate.removeAttribute("disabled");
+                    btnCreate.innerHTML = `CREATE`
                 }
             }else{
                 this.alertShow = true,
                 this.alert = 'Senhas não conferem!'
+                btnCreate.removeAttribute("disabled");
+                btnCreate.innerHTML = `CREATE`
             }
         }
     }

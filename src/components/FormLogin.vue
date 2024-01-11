@@ -13,7 +13,7 @@
             </InputGroupAddon>
             <Password id="inputPass" :feedback="false" placeholder="Password" v-model="inputPass" />
         </InputGroup>
-        <Button label="LOGIN" @click="checkUser(inputUser, inputPass)"></Button>
+        <Button id="btnLogin" label="" @click="checkUser(inputUser, inputPass)">LOGIN</Button>
         <p v-show="notUser" class="alert_notUser">Usuário não encontrado!</p>
     </div>
 </template>
@@ -47,18 +47,23 @@ export default {
     },
     methods: {
         async checkUser(inputUser, inputPass) {
-            console.log(inputUser, inputPass)
+            const btnLogin = document.querySelector("#btnLogin");
+            btnLogin.setAttribute("disabled", "");
+            btnLogin.innerHTML = `<i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>`
+            
             try {
                 const user = await get_users(inputUser, inputPass);
                 console.log(user);
                 if(user[0].log === 'true'){
-                    window.localStorage.setItem("session_code", user[0].user.session_code)
-                    this.$router.push("/feed")
+                    window.localStorage.setItem("session_code", user[0].user.session_code);
+                    this.$router.push("/feed");
                 }
             } catch (error) {
                 this.notUser = true;
                 console.log('Usuario não encontrado');
                 document.querySelector("i").setAttribute("color", "red");
+                btnLogin.removeAttribute("disabled");
+                btnLogin.innerHTML = `LOGIN`
             }
         }
     }

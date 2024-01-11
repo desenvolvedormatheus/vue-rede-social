@@ -36,9 +36,6 @@ export default {
     this.valid_local_session("659deaa607ac5")
   }
 }
-
-
-
 </script>
 
 <style scoped></style>
