@@ -56,6 +56,8 @@ export default {
                 console.log(user);
                 if(user[0].log === 'true'){
                     window.localStorage.setItem("session_code", user[0].user.session_code);
+                    btnLogin.removeAttribute("disabled");
+                    btnLogin.innerHTML = `LOGIN`
                     this.$router.push("/feed");
                 }
             } catch (error) {

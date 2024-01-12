@@ -27,19 +27,41 @@
 </template>
 
 <script>
+import { get_users } from '@/services/getusers';
+
 export default {
     data() {
         return {
             name: "FeedProfile",
             user: {
-                imgBackground: "https://media.licdn.com/dms/image/D4D16AQE6bB1SkB52AQ/profile-displaybackgroundimage-shrink_350_1400/0/1703595584443?e=1710374400&v=beta&t=3xz2Sa5n62aqN2FsMPzWZpHLJRqCVMJQYXLsyr0xoes",
-                imgProfile: "https://img.freepik.com/vetores-gratis/panda-bonito-vestindo-sapatos-e-acenando-a-mao-ilustracao-vetorial-icone-dos-desenhos-animados-natureza-animal-isolada_138676-4982.jpg?w=740&t=st=1701966302~exp=1701966902~hmac=fa5a0ab00dd8947866f556ae831d98cc54aaff3c1e9387f20ca91a869b25cd85",
-                name: "Matheus",
-                description: "Desenvolvedor de sitemas",
-                profile_views: 31,
-                connections: 664,
+                imgBackground: "https://files.adventistas.org/institucional/pt/sites/26/2023/07/fundo-dng.jpg",
+                imgProfile: "https://static.vecteezy.com/ti/vetor-gratis/p1/26619142-padrao-avatar-perfil-icone-do-social-meios-de-comunicacao-do-utilizador-foto-imagem-vetor.jpg",
+                name: "not user",
+                description: "Not description",
+                profile_views: 0,
+                connections: 0,
             }
         }
+    },
+    methods:{
+        async user_details(){
+            try {
+                const session_user = await get_users(false, false, window.localStorage.session_code);
+                console.log(session_user[0].user);
+
+                this.user.imgBackground = session_user[0].user.img_background;
+                this.user.imgProfile = session_user[0].user.perfil_image;
+                this.user.name = session_user[0].user.username;
+                this.user.description = session_user[0].user.description;
+                this.user.profile_views = session_user[0].user.profile_views;
+                this.user.connections = session_user[0].user.connections;
+            } catch (error) {
+                console.log('Usuario não encontrado');
+            }
+        }
+    },
+    mounted(){
+        this.user_details()      
     }
 }
 </script>
@@ -54,6 +76,7 @@ export default {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
+    max-width: 300px;
 }
 
 /* imagens */
@@ -62,6 +85,7 @@ export default {
     filter: drop-shadow(0.2rem 0.3rem 0.1rem #00000048);
     height: 90px;
 }
+
 .image-profile {
     width: 90px;
     border-radius: 100%;
@@ -71,14 +95,18 @@ export default {
 }
 
 /* detalhes */
-.profile-details{
+.profile-details {
     padding: 0 1rem;
 }
-.info{
+
+.info {
     display: flex;
     justify-content: space-between;
     padding: 1rem 0;
+    gap: 1rem;
+    text-align: end;
 }
+
 /* extra */
 .fakeLink {
     cursor: pointer;

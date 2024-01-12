@@ -45,7 +45,11 @@ export default {
                         },
                         {
                             label: 'Log out',
-                            icon: 'pi pi-power-off'
+                            icon: 'pi pi-power-off',
+                            command: () => {
+                                window.localStorage.removeItem("session_code")
+                                this.$router.push("/")
+                            }
                         },
                     ]
                 },

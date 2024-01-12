@@ -5,7 +5,7 @@
     </header>
     <main class="container-main">
       <FeedProfile></FeedProfile>
-      
+
       <div>
         <p>foto perfil - textarea - btn postar</p>
         <hr>
@@ -20,54 +20,45 @@
       </div>
 
     </main>
-    
-    <Button label="Logof" severity="warning" @click="logOf()"></Button>
   </div>
 </template>
 
 <script>
-import Button from 'primevue/button';
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
 
+// API
+import { check_session } from '@/services/checksession';
+
 export default {
   components: {
-    Button,
     FeedNavbar,
     FeedProfile,
   },
   methods: {
-    logOf() {
-      window.localStorage.removeItem("session_code")
-      this.$router.push("/")
-    },
-    valid_local_session(server_session) {
+    async checkUser(server_session) {
+      const session_server = await check_session(server_session);
       try {
-        if (server_session === window.localStorage.session_code) {
-          console.log('Sessao: '+ window.localStorage.session_code)
-        } else {
-          console.log('Sessão não iniciada');
-          this.$router.push("/notLogin")
-        }
-
+        console.log("achou");
+        console.log(session_server);
       } catch (error) {
-        console.log('Erro não identificado');
-        this.$router.push("/Error")
+        console.log("não achou");
       }
-    }
+    },
   },
   mounted() {
     document.getElementById("app").style.margin = '0'
-    this.valid_local_session("659deaa607ac5")
+    this.checkUser(window.localStorage.session_code)
   }
 }
 </script>
 
 <style scoped>
-.container{
+.container {
   width: 100vw;
 }
-.container-main{
+
+.container-main {
   display: flex;
   justify-content: space-around;
   margin-top: 1rem;
