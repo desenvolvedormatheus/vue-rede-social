@@ -1,41 +1,39 @@
 <template>
-    <transition>
-        <Message :closable="false" icon="pi pi-send">
-            <div class="icon">
-                <i class="pi pi-prime"></i>
-            </div>
-            <template #messageicon>
-                <i></i>
-            </template>
-            <div class="LoginView-form">
-                <div class="formWidth">
-                    <div class="formGroup">
-                        <h1>Welcome Back!</h1>
-                        <p>If you already have an account, log in!</p>
-                    </div>
-                    <FormLogin class="form" v-if="login" />
-                    <div v-else>
-                        <Button label="LOGIN" @click="log()"></Button>
-                    </div>
+    <Message :closable="false" icon="pi pi-send">
+        <div class="icon">
+            <i class="pi pi-prime"></i>
+        </div>
+        <template #messageicon>
+            <i></i>
+        </template>
+        <div class="LoginView-form">
+            <div class="formWidth">
+                <div class="formGroup">
+                    <h1>Welcome Back!</h1>
+                    <p>If you already have an account, log in!</p>
                 </div>
-                <div class="divider">
-                    <div class="row"></div>
-                    <p>OR</p>
-                    <div class="row"></div>
-                </div>
-                <div class="formWidth">
-                    <div class="formGroup">
-                        <h1>Create Account!</h1>
-                        <p>Register on our platform to access all resources!</p>
-                    </div>
-                    <FormRegister class="form" v-if="register" />
-                    <div v-else>
-                        <Button label="CREATE" @click="reg()"></Button>
-                    </div>
+                <FormLogin class="form" v-if="login" />
+                <div v-else>
+                    <Button label="LOGIN" @click="log()"></Button>
                 </div>
             </div>
-        </Message>
-    </transition>
+            <div class="divider">
+                <div class="row"></div>
+                <p>OR</p>
+                <div class="row"></div>
+            </div>
+            <div class="formWidth">
+                <div class="formGroup">
+                    <h1>Create Account!</h1>
+                    <p>Register on our platform to access all resources!</p>
+                </div>
+                <FormRegister class="form" v-if="register" />
+                <div v-else>
+                    <Button label="CREATE" @click="reg()"></Button>
+                </div>
+            </div>
+        </div>
+    </Message>
 </template>
 
 <script>
@@ -70,7 +68,7 @@ export default {
         Button,
         Message,
     },
-    mounted() {
+    mounted(){
         document.getElementById("app").style.margin = 'auto'
     }
 }
@@ -78,32 +76,28 @@ export default {
 </script>
 
 <style scoped>
-.icon {
+.icon{
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
 }
-
-.pi-prime {
+.pi-prime{
     color: #ffffff;
     font-size: 4rem;
     position: absolute;
     top: -4rem;
 }
-
 .LoginView-form {
     display: flex;
     flex-direction: row;
 }
-
 .LoginView-form div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 .divider {
     margin: 0 3rem;
 }
@@ -124,8 +118,7 @@ export default {
     text-align: center;
     margin-bottom: 1rem;
 }
-
-.formWidth {
+.formWidth{
     width: 22rem;
     height: 25rem;
 }
@@ -134,4 +127,5 @@ export default {
     .LoginView-form {
         flex-direction: column;
     }
-}</style>
+}
+</style>
