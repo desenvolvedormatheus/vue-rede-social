@@ -1,16 +1,24 @@
 <template>
   <div class="container">
     <header>
-      <FeedNavTop></FeedNavTop>
+      <FeedNavbar></FeedNavbar>
     </header>
-    <main>
-      <p>fundo + foto Perfil + descrição | vizualizações do perfil conexões | posts salvos</p>
+    <main class="container-main">
+      <FeedProfile></FeedProfile>
       
-      <p>foto perfil - textarea - btn postar</p>
+      <div>
+        <p>foto perfil - textarea - btn postar</p>
+        <hr>
+        <div>
+          <p>card de post</p>
+        </div>
+      </div>
 
-      <p>card de post</p>
 
-      <p>Noticias</p>
+      <div>
+        <p>Noticias</p>
+      </div>
+
     </main>
     
     <Button label="Logof" severity="warning" @click="logOf()"></Button>
@@ -19,12 +27,14 @@
 
 <script>
 import Button from 'primevue/button';
-import FeedNavTop from '../components/FeedNavTop.vue';
+import FeedNavbar from '@/components/FeedNavbar.vue';
+import FeedProfile from '@/components/FeedProfile.vue';
 
 export default {
   components: {
     Button,
-    FeedNavTop,
+    FeedNavbar,
+    FeedProfile,
   },
   methods: {
     logOf() {
@@ -56,5 +66,10 @@ export default {
 <style scoped>
 .container{
   width: 100vw;
+}
+.container-main{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
 </style>

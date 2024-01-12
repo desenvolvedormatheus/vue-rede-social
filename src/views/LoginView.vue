@@ -1,5 +1,5 @@
 <template>
-    <Message :closable="false" icon="pi pi-send">
+    <Message :closable="false" icon="pi pi-send" class="container">
         <div class="icon">
             <i class="pi pi-prime"></i>
         </div>
@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+
+.container{
+    margin-top: 4rem;
+}
 .icon{
     position: relative;
     width: 100%;

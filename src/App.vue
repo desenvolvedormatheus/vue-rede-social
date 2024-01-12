@@ -11,6 +11,7 @@
 :root{
   --primary-color: #93c5fd;
   --secondary-color: #ff5656;
+  --third-color: #374151;
 }
 
 *{

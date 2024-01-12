@@ -21,7 +21,7 @@ import Menubar from 'primevue/menubar';
 export default {
     data() {
         return {
-            name: "FeedNavTop",
+            name: "FeedNavbar",
             items: ([
                 {
                     label: 'Home',
@@ -36,12 +36,16 @@ export default {
                     icon: 'pi pi-user',
                     items: [
                         {
+                            label: 'Settings',
+                            icon: 'pi pi-cog'
+                        },
+                        {
                             label: 'Profile',
                             icon: 'pi pi-user-edit'
                         },
                         {
-                            label: 'Settings',
-                            icon: 'pi pi-cog'
+                            label: 'Log out',
+                            icon: 'pi pi-power-off'
                         },
                     ]
                 },
@@ -59,7 +63,7 @@ export default {
 
 <style scoped>
 .container{
-    background: #374151;
+    background: var(--third-color);
     display: flex;
     height: 4rem;
     align-items: center;
