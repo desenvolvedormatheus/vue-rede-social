@@ -34,12 +34,12 @@ export default {
         return {
             name: "FeedProfile",
             user: {
-                imgBackground: "https://files.adventistas.org/institucional/pt/sites/26/2023/07/fundo-dng.jpg",
-                imgProfile: "https://static.vecteezy.com/ti/vetor-gratis/p1/26619142-padrao-avatar-perfil-icone-do-social-meios-de-comunicacao-do-utilizador-foto-imagem-vetor.jpg",
-                name: "not user",
-                description: "Not description",
-                profile_views: 0,
-                connections: 0,
+                imgBackground: "",
+                imgProfile: "",
+                name: "",
+                description: "",
+                profile_views: "",
+                connections: "",
             }
         }
     },
@@ -47,14 +47,44 @@ export default {
         async user_details(){
             try {
                 const session_user = await get_users(false, false, window.localStorage.session_code);
-                console.log(session_user[0].user);
 
-                this.user.imgBackground = session_user[0].user.img_background;
-                this.user.imgProfile = session_user[0].user.perfil_image;
-                this.user.name = session_user[0].user.username;
-                this.user.description = session_user[0].user.description;
-                this.user.profile_views = session_user[0].user.profile_views;
-                this.user.connections = session_user[0].user.connections;
+                console.log(session_user[0].user.perfil_image)
+
+                if(session_user[0].user.img_background === null){
+                    this.user.imgBackground = 'https://files.adventistas.org/institucional/pt/sites/26/2023/07/fundo-dng.jpg';
+                }else{
+                    this.user.imgBackground = session_user[0].user.img_background;
+                }
+                if(session_user[0].user.perfil_image === null){
+                    this.user.imgProfile = 'https://static.vecteezy.com/ti/vetor-gratis/p1/26619142-padrao-avatar-perfil-icone-do-social-meios-de-comunicacao-do-utilizador-foto-imagem-vetor.jpg';
+                }else{
+                    this.user.imgProfile = session_user[0].user.perfil_image;
+                }
+
+                if(session_user[0].user.username === null){
+                    this.user.name = 'usarname not found';
+                }else{
+                    this.user.name = session_user[0].user.username;
+                }
+                
+                if(session_user[0].user.description === null){
+                    this.user.description = 'Not description';
+                }else{
+                    this.user.description = session_user[0].user.description;
+                }
+
+                if(session_user[0].user.profile_views === null){
+                    this.user.profile_views = '0';
+                }else{
+                    this.user.profile_views = session_user[0].user.profile_views;
+                }
+
+                if(session_user[0].user.connections === null){
+                    this.user.connections = '0';
+                }else{
+                    this.user.connections = session_user[0].user.connections;
+                }
+
             } catch (error) {
                 console.log('Usuario não encontrado');
             }
