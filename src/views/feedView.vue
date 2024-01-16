@@ -3,17 +3,20 @@
     <header>
       <FeedNavbar></FeedNavbar>
     </header>
-    
+
     <main class="container-main">
       <FeedProfile></FeedProfile>
 
       <div class="mid">
         <FeedNewPost></FeedNewPost>
         <FeedCardsPosts></FeedCardsPosts>
+        <FeedCardsPosts></FeedCardsPosts>
+        <FeedCardsPosts></FeedCardsPosts>
+        <FeedCardsPosts></FeedCardsPosts>
       </div>
 
       <div>
-        <p>Noticias</p>
+        <FeedNews></FeedNews>
       </div>
 
     </main>
@@ -25,6 +28,7 @@ import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
 import FeedNewPost from '@/components/feedNewPost.vue';
 import FeedCardsPosts from '@/components/FeedCardsPosts.vue';
+import FeedNews from '@/components/FeedNews.vue';
 
 // API
 import { check_session } from '@/services/checksession';
@@ -35,6 +39,7 @@ export default {
     FeedProfile,
     FeedNewPost,
     FeedCardsPosts,
+    FeedNews,
   },
   methods: {
     async checkUser(server_session) {
@@ -57,6 +62,7 @@ export default {
 <style scoped>
 .container {
   width: 100vw;
+  padding-right: 0.7rem;
 }
 
 .container-main {
@@ -65,8 +71,8 @@ export default {
   margin-top: 1rem;
 }
 
-.mid{
-  width: 600px;
+.mid {
+  width: 700px;
   display: flex;
   flex-direction: column;
   gap: 1rem;

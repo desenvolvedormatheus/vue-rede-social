@@ -104,7 +104,7 @@ export default {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    width: 300px;
+    width: 350px;
     height: 400px;
 }
 
