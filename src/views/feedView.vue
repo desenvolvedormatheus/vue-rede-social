@@ -3,17 +3,17 @@
     <header>
       <FeedNavbar></FeedNavbar>
     </header>
+    
     <main class="container-main">
       <FeedProfile></FeedProfile>
 
-      <div>
-        <p>foto perfil - textarea - btn postar</p>
+      <div class="mid">
+        <FeedNewPost></FeedNewPost>
         <hr>
         <div>
           <p>card de post</p>
         </div>
       </div>
-
 
       <div>
         <p>Noticias</p>
@@ -26,6 +26,7 @@
 <script>
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
+import FeedNewPost from '@/components/feedNewPost.vue';
 
 // API
 import { check_session } from '@/services/checksession';
@@ -34,6 +35,7 @@ export default {
   components: {
     FeedNavbar,
     FeedProfile,
+    FeedNewPost,
   },
   methods: {
     async checkUser(server_session) {
@@ -62,5 +64,9 @@ export default {
   display: flex;
   justify-content: space-around;
   margin-top: 1rem;
+}
+
+.mid{
+  width: 600px;
 }
 </style>
