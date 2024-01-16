@@ -105,6 +105,7 @@ export default {
     border-radius: 10px;
     overflow: hidden;
     width: 300px;
+    height: 400px;
 }
 
 /* imagens */

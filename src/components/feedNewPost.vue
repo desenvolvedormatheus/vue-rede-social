@@ -1,6 +1,5 @@
 <template>
     <div class="container-new-post">
-        <h1>New post</h1>
         <form @submit="onSubmit">
             <Editor v-model="textPost" editorStyle="height: 100px" aria-describedby="editor-error">
                 <template v-slot:toolbar>

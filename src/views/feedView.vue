@@ -9,10 +9,7 @@
 
       <div class="mid">
         <FeedNewPost></FeedNewPost>
-        <hr>
-        <div>
-          <p>card de post</p>
-        </div>
+        <FeedCardsPosts></FeedCardsPosts>
       </div>
 
       <div>
@@ -27,6 +24,7 @@
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
 import FeedNewPost from '@/components/feedNewPost.vue';
+import FeedCardsPosts from '@/components/FeedCardsPosts.vue';
 
 // API
 import { check_session } from '@/services/checksession';
@@ -36,6 +34,7 @@ export default {
     FeedNavbar,
     FeedProfile,
     FeedNewPost,
+    FeedCardsPosts,
   },
   methods: {
     async checkUser(server_session) {
@@ -68,5 +67,8 @@ export default {
 
 .mid{
   width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 </style>
