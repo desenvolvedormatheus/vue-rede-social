@@ -48,7 +48,7 @@ export default {
             try {
                 const session_user = await get_users(false, false, window.localStorage.session_code);
 
-                console.log(session_user[0].user.perfil_image)
+                console.log(session_user[0].user.img_background)
 
                 if(session_user[0].user.img_background === null){
                     this.user.imgBackground = 'https://files.adventistas.org/institucional/pt/sites/26/2023/07/fundo-dng.jpg';
@@ -106,7 +106,7 @@ export default {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    max-width: 300px;
+    width: 300px;
 }
 
 /* imagens */
