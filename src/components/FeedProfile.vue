@@ -35,7 +35,7 @@ export default {
             name: "FeedProfile",
             user: {
                 imgBackground: "",
-                imgProfile: "",
+                imgProfile: "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
                 name: "",
                 description: "",
                 profile_views: "",
@@ -104,7 +104,7 @@ export default {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    width: 350px;
+    width: 300px;
     height: 400px;
 }
 

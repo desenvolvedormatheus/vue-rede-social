@@ -34,4 +34,9 @@ h1, p{
   margin: 0;
 }
 
+ul, ol{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 </style>

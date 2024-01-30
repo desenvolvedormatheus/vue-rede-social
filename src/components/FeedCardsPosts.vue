@@ -1,25 +1,23 @@
 <template>
-    <div>
-        <Panel>
-            <template #header>
-                <div class="header">
-                    <Avatar :image="post_user_perfil" shape="circle"></Avatar>
-                    <span>{{ post_user_nome }}</span>
-                </div>
-            </template>
-            <template #icons>
-                <span class="hour">Hora do post</span>
-            </template>
-            <p class="text-post">{{ post_text }}</p>
-            <template #footer>
-                <div class="footer">
-                    <i class="pi pi-heart"></i>
-                    <i class="pi pi-share-alt"></i>
-                    <i class="pi pi-bookmark"></i>
-                </div>
-            </template>
-        </Panel>
-    </div>
+    <Panel class="panel">
+        <template #header>
+            <div class="header">
+                <Avatar :image="post_user_perfil" shape="circle"></Avatar>
+                <span>{{ post_user_nome }}</span>
+            </div>
+        </template>
+        <template #icons>
+            <span class="hour">{{ post_date }}</span>
+        </template>
+        <p class="text-post">{{ content }}</p>
+        <template #footer>
+            <div class="footer">
+                <i class="pi pi-heart"></i>
+                <i class="pi pi-share-alt"></i>
+                <i class="pi pi-bookmark"></i>
+            </div>
+        </template>
+    </Panel>
 </template>
 
 <script>
@@ -27,12 +25,35 @@ import Panel from 'primevue/panel';
 import Avatar from 'primevue/avatar';
 
 export default {
+    props:{
+        user: {
+            type: String,
+            required: true,
+            default: "Usuário"
+        },
+        perfil: {
+            type: String,
+            required: true,
+            default: "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"
+        },
+        content: {
+            type: String,
+            required: true,
+            default: "Algo de errado com o post, por favor chame a equipe de report do site"
+        },
+        post_date: {
+            type: String,
+            required: true,
+            default: "30-01-08 12:57:00"
+        }
+    },
     data() {
         return {
             name: "FeedCardsPosts",
-            post_user_nome: "usuario",
-            post_user_perfil: "https://img.freepik.com/vetores-gratis/panda-bonito-vestindo-sapatos-e-acenando-a-mao-ilustracao-vetorial-icone-dos-desenhos-animados-natureza-animal-isolada_138676-4982.jpg?w=740&t=st=1701966302~exp=1701966902~hmac=fa5a0ab00dd8947866f556ae831d98cc54aaff3c1e9387f20ca91a869b25cd85",
-            post_text: "Textinho do post Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi error nobis repudiandae? Quos porro laborum in fugiat necessitatibus saepe aut, laboriosam rerum? Amet facilis doloremque iste quaerat optio laboriosam reprehenderit.",
+            post_user_nome: this.user,
+            post_user_perfil: this.perfil,
+            content: this.content,
+            post_date: this.post_date,
         }
     },
     components: {
@@ -43,6 +64,9 @@ export default {
 </script>
 
 <style scoped>
+.panel{
+    margin-top: 1rem;
+}
 .header {
     display: flex;
     align-items: center;
@@ -57,9 +81,11 @@ export default {
     display: flex;
     gap: 1rem;
 }
-.footer i{
+
+.footer i {
     cursor: pointer;
 }
+
 .hour {
     color: #666666;
 }</style>

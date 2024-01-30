@@ -9,10 +9,16 @@
 
       <div class="mid">
         <FeedNewPost></FeedNewPost>
-        <FeedCardsPosts></FeedCardsPosts>
-        <FeedCardsPosts></FeedCardsPosts>
-        <FeedCardsPosts></FeedCardsPosts>
-        <FeedCardsPosts></FeedCardsPosts>
+        <ul id="feedPosts">
+          <li v-for="post in posts" :key="post.user">
+            <FeedCardsPosts
+            :user="post.user" 
+            :perfil="post.perfil" 
+            :content="post.content" 
+            :post_date="post.post_date" 
+            ></FeedCardsPosts>
+          </li>
+        </ul>
       </div>
 
       <div>
@@ -24,6 +30,7 @@
 </template>
 
 <script>
+import { get_users } from '@/services/getusers';
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
 import FeedNewPost from '@/components/feedNewPost.vue';
@@ -34,6 +41,31 @@ import FeedNews from '@/components/FeedNews.vue';
 import { check_session } from '@/services/checksession';
 
 export default {
+  data(){
+    return{
+      posts: [
+        {
+          user: "ADM",
+          perfil: "a",
+          post_date: "25-01-08 12:57:00",
+          content: "post teste rede v2",
+        },
+        {
+          user: "Helem",
+          perfil: "bb",
+          post_date: "30-01-08 12:57:00",
+          content: "outro post teste rede v2",
+        },
+        {
+          user: "Helem",
+          perfil: "bb",
+          post_date: "08-01-08 12:57:00",
+          content: "outro post teste rede v2",
+        },
+      ],
+      user: {}
+    }
+  },
   components: {
     FeedNavbar,
     FeedProfile,
@@ -46,15 +78,28 @@ export default {
       const session_server = await check_session(server_session);
       try {
         console.log("achou");
-        console.log(session_server);
       } catch (error) {
         console.log("não achou");
       }
     },
+    async user_details() {
+      try {
+        const user_details = await get_users(false, false, window.localStorage.session_code);
+        console.log(user_details[0].user);
+        this.user = {
+          username: user_details[0].user.username,
+          username: user_details[0].user.username,
+        }
+      } catch (error) {
+        console.log('Usuario não encontrado');
+      }
+    }
   },
   mounted() {
-    document.getElementById("app").style.margin = '0'
-    this.checkUser(window.localStorage.session_code)
+    document.getElementById("app").style.margin = '0';
+    this.checkUser(window.localStorage.session_code);
+    this.user_details();
+    console.log(this.user)
   }
 }
 </script>
@@ -62,7 +107,6 @@ export default {
 <style scoped>
 .container {
   width: 100vw;
-  padding-right: 0.7rem;
 }
 
 .container-main {
@@ -72,9 +116,8 @@ export default {
 }
 
 .mid {
-  width: 700px;
+  width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 </style>
