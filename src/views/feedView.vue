@@ -8,7 +8,7 @@
       <FeedProfile></FeedProfile>
 
       <div class="mid">
-        <FeedNewPost></FeedNewPost>
+        <FeedNewPost :posts_details="posts_details"></FeedNewPost>
         <ul id="feedPosts">
           <li v-for="post in posts" :key="post.user">
             <FeedCardsPosts :user="post.user" :perfil="post.perfil" :content="post.content" :post_date="post.post_date">
@@ -65,8 +65,8 @@ export default {
     async posts_details() {
       try {
         const posts_details = await get_posts();
-        console.log(posts_details);
-        for(let _i = 0; _i < posts_details.length; _i++){
+        this.posts.pop();
+        for (let _i = 0; _i < posts_details.length; _i++) {
           this.posts.push(
             {
               user: posts_details[_i].username,
@@ -74,7 +74,7 @@ export default {
               post_date: posts_details[_i].post_date,
               content: posts_details[_i].content,
             },
-        )
+          )
         }
       } catch (error) {
         console.log('posts não encontrados');
@@ -107,7 +107,7 @@ export default {
   flex-direction: column;
 }
 
-.feed-container-footer{
+.feed-container-footer {
   text-align: center;
   color: var(--primary-color);
   background: var(--third-color);

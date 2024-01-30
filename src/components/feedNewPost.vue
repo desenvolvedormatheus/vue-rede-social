@@ -1,6 +1,7 @@
 <template>
     <div class="container-new-post">
         <form @submit="onSubmit">
+            <p class="title-new-post">New post</p>
             <Editor v-model="textPost" editorStyle="height: 100px" aria-describedby="editor-error">
                 <template v-slot:toolbar>
                     <span class="ql-formats">
@@ -22,14 +23,16 @@
 <script>
 import Editor from 'primevue/editor';
 import Button from 'primevue/button';
+import { set_posts } from '@/services/setposts';
 
 export default {
     data() {
         return {
             name: "FeedNewPost",
-            textPost: "Share something!",
+            textPost: "",
             errorPost: false,
             sucessPost: false,
+            user_id: localStorage.getItem("user_id"),
         }
     },
     components: {
@@ -42,15 +45,26 @@ export default {
                 this.errorPost = true;
                 this.sucessPost = false;
             }else{
+                set_posts(this.user_id, this.textPost);
                 this.sucessPost = true;
                 this.errorPost = false;
             }
         }
+    },
+    props: {
+        posts_details:{
+            type: Function,
+            required: true,
+        },
     }
 }
 </script>
 
 <style scoped>
+.title-new-post{
+    margin: 0 0 0.5rem 0.3rem;
+    font-size: 1.3rem;
+}
 .container-new-post {
     display: flex;
     flex-direction: column;

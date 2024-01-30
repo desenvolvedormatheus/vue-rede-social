@@ -53,9 +53,10 @@ export default {
             
             try {
                 const user = await get_users(inputUser, inputPass);
-                console.log(user);
+                console.log(user[0]);
                 if(user[0].log === 'true'){
                     window.localStorage.setItem("session_code", user[0].user.session_code);
+                    window.localStorage.setItem("user_id", user[0].user.user_id);
                     btnLogin.removeAttribute("disabled");
                     btnLogin.innerHTML = `LOGIN`
                     this.$router.push("/feed");

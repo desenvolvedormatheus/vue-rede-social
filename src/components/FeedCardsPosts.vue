@@ -9,7 +9,7 @@
         <template #icons>
             <span class="hour">{{ post_user_date }}</span>
         </template>
-        <p class="text-post">{{ post_user_text }}</p>
+        <p class="text-post" v-html="post_user_text"></p>
         <template #footer>
             <div class="footer">
                 <i class="pi pi-heart"></i>
