@@ -11,12 +11,8 @@
         <FeedNewPost></FeedNewPost>
         <ul id="feedPosts">
           <li v-for="post in posts" :key="post.user">
-            <FeedCardsPosts
-            :user="post.user" 
-            :perfil="post.perfil" 
-            :content="post.content" 
-            :post_date="post.post_date" 
-            ></FeedCardsPosts>
+            <FeedCardsPosts :user="post.user" :perfil="post.perfil" :content="post.content" :post_date="post.post_date">
+            </FeedCardsPosts>
           </li>
         </ul>
       </div>
@@ -30,7 +26,7 @@
 </template>
 
 <script>
-import { get_users } from '@/services/getusers';
+import { get_posts } from '@/services/getposts';
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
 import FeedNewPost from '@/components/feedNewPost.vue';
@@ -41,29 +37,9 @@ import FeedNews from '@/components/FeedNews.vue';
 import { check_session } from '@/services/checksession';
 
 export default {
-  data(){
-    return{
-      posts: [
-        {
-          user: "ADM",
-          perfil: "a",
-          post_date: "25-01-08 12:57:00",
-          content: "post teste rede v2",
-        },
-        {
-          user: "Helem",
-          perfil: "bb",
-          post_date: "30-01-08 12:57:00",
-          content: "outro post teste rede v2",
-        },
-        {
-          user: "Helem",
-          perfil: "bb",
-          post_date: "08-01-08 12:57:00",
-          content: "outro post teste rede v2",
-        },
-      ],
-      user: {}
+  data() {
+    return {
+      posts: [],
     }
   },
   components: {
@@ -75,31 +51,37 @@ export default {
   },
   methods: {
     async checkUser(server_session) {
-      const session_server = await check_session(server_session);
       try {
-        console.log("achou");
+        const session_server = await check_session(server_session);
+        console.log("Usuário autorizado");
       } catch (error) {
-        console.log("não achou");
+        console.log("Usuário não autorizado");
       }
     },
-    async user_details() {
+    async posts_details() {
       try {
-        const user_details = await get_users(false, false, window.localStorage.session_code);
-        console.log(user_details[0].user);
-        this.user = {
-          username: user_details[0].user.username,
-          username: user_details[0].user.username,
+        const posts_details = await get_posts();
+        console.log(posts_details);
+        for(let _i = 0; _i < posts_details.length; _i++){
+          this.posts.push(
+            {
+              user: posts_details[_i].username,
+              perfil: posts_details[_i].perfil_image,
+              post_date: posts_details[_i].post_date,
+              content: posts_details[_i].content,
+            },
+        )
         }
       } catch (error) {
-        console.log('Usuario não encontrado');
+        console.log('posts não encontrados');
+        console.log(error);
       }
     }
   },
   mounted() {
     document.getElementById("app").style.margin = '0';
     this.checkUser(window.localStorage.session_code);
-    this.user_details();
-    console.log(this.user)
+    this.posts_details();
   }
 }
 </script>

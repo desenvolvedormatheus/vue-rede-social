@@ -7,9 +7,9 @@
             </div>
         </template>
         <template #icons>
-            <span class="hour">{{ post_date }}</span>
+            <span class="hour">{{ post_user_date }}</span>
         </template>
-        <p class="text-post">{{ content }}</p>
+        <p class="text-post">{{ post_user_text }}</p>
         <template #footer>
             <div class="footer">
                 <i class="pi pi-heart"></i>
@@ -44,7 +44,7 @@ export default {
         post_date: {
             type: String,
             required: true,
-            default: "30-01-08 12:57:00"
+            default: "00-00-00 00:00:00"
         }
     },
     data() {
@@ -52,8 +52,8 @@ export default {
             name: "FeedCardsPosts",
             post_user_nome: this.user,
             post_user_perfil: this.perfil,
-            content: this.content,
-            post_date: this.post_date,
+            post_user_text: this.content,
+            post_user_date: this.post_date,
         }
     },
     components: {
