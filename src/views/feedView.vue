@@ -22,6 +22,10 @@
       </div>
 
     </main>
+
+    <footer class="feed-container-footer">
+      <p><i>By - Matheus Souza</i></p>
+    </footer>
   </div>
 </template>
 
@@ -101,5 +105,13 @@ export default {
   width: 600px;
   display: flex;
   flex-direction: column;
+}
+
+.feed-container-footer{
+  text-align: center;
+  color: var(--primary-color);
+  background: var(--third-color);
+  padding: 0.3rem;
+  margin-top: 1rem;
 }
 </style>
