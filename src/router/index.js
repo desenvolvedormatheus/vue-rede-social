@@ -18,6 +18,11 @@ const routes = [
     component: () => import('../views/notLoginView.vue')
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/ProfileView.vue')
+  },
+  {
     path: '/Error',
     name: 'Error',
     component: () => import('../views/ErrorView.vue')

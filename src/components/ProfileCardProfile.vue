@@ -31,7 +31,7 @@
 export default {
     data() {
         return {
-            name: "FeedProfile",
+            name: "ProfileCardProfile",
             user: {
                 imgBackground: "",
                 imgProfile: "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
@@ -42,43 +42,44 @@ export default {
             }
         }
     },
-    methods: {
-        async user_details() {
+    methods:{
+        async user_details(){
             try {
-                if (localStorage.img_background === null) {
+                const session_user = await get_users(false, false, window.localStorage.session_code);
+
+                if(session_user[0].user.img_background === null){
                     this.user.imgBackground = 'https://files.adventistas.org/institucional/pt/sites/26/2023/07/fundo-dng.jpg';
-                } else {
-                    this.user.imgBackground = localStorage.img_background;
+                }else{
+                    this.user.imgBackground = session_user[0].user.img_background;
                 }
-
-                if (localStorage.perfil_image === null) {
+                if(session_user[0].user.perfil_image === null){
                     this.user.imgProfile = 'https://static.vecteezy.com/ti/vetor-gratis/p1/26619142-padrao-avatar-perfil-icone-do-social-meios-de-comunicacao-do-utilizador-foto-imagem-vetor.jpg';
-                } else {
-                    this.user.imgProfile = localStorage.perfil_image;
+                }else{
+                    this.user.imgProfile = session_user[0].user.perfil_image;
                 }
 
-                if (localStorage.username === null) {
+                if(session_user[0].user.username === null){
                     this.user.name = 'usarname not found';
-                } else {
-                    this.user.name = localStorage.username;
+                }else{
+                    this.user.name = session_user[0].user.username;
                 }
-
-                if (localStorage.description === null) {
+                
+                if(session_user[0].user.description === null){
                     this.user.description = 'Not description';
-                } else {
-                    this.user.description = localStorage.description
+                }else{
+                    this.user.description = session_user[0].user.description;
                 }
 
-                if (localStorage.profile_views === null) {
+                if(session_user[0].user.profile_views === null){
                     this.user.profile_views = '0';
-                } else {
-                    this.user.profile_views = localStorage.profile_views;
+                }else{
+                    this.user.profile_views = session_user[0].user.profile_views;
                 }
 
-                if (localStorage.connections === null) {
+                if(session_user[0].user.connections === null){
                     this.user.connections = '0';
-                } else {
-                    this.user.connections = localStorage.connections;
+                }else{
+                    this.user.connections = session_user[0].user.connections;
                 }
 
             } catch (error) {
@@ -86,8 +87,8 @@ export default {
             }
         }
     },
-    mounted() {
-        this.user_details()
+    mounted(){
+        this.user_details()      
     }
 }
 </script>
@@ -102,8 +103,7 @@ export default {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    width: 300px;
-    height: 400px;
+    width: 900px;
 }
 
 /* imagens */

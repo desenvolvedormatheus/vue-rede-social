@@ -14,7 +14,7 @@
             <Password id="inputPass" :feedback="false" placeholder="Password" v-model="inputPass" />
         </InputGroup>
         <Button id="btnLogin" label="" @click="checkUser(inputUser, inputPass)">LOGIN</Button>
-        <p v-show="notUser" class="alert_notUser">Usuário não encontrado!</p>
+        <p v-show="notUser" class="alert_notUser">Usuário ou senha inválidos!</p>
     </div>
 </template>
 
@@ -24,9 +24,6 @@ import InputGroupAddon from 'primevue/inputgroupaddon';
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password';
 import Button from 'primevue/button';
-
-// API
-import { get_users } from '@/services/getusers';
 
 export default {
     name: "FormLogin",
@@ -50,23 +47,43 @@ export default {
             const btnLogin = document.querySelector("#btnLogin");
             btnLogin.setAttribute("disabled", "");
             btnLogin.innerHTML = `<i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>`
-            
+
+            const key = 'd6s809afdas89ffdsa7890'
             try {
-                const user = await get_users(inputUser, inputPass);
-                console.log(user[0]);
-                if(user[0].log === 'true'){
-                    window.localStorage.setItem("session_code", user[0].user.session_code);
-                    window.localStorage.setItem("user_id", user[0].user.user_id);
+                const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=get_users&user=${inputUser}&pass=${inputPass}`
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Failed to resposta')
+                }
+                const data = await response.json();
+                if (data[0].log === true) {
+                    window.localStorage.setItem("session_code", data[0].user.session_code);
+                    window.localStorage.setItem("connections", data[0].user.connections);
+                    window.localStorage.setItem("description", data[0].user.description);
+                    window.localStorage.setItem("img_background", data[0].user.img_background);
+                    window.localStorage.setItem("perfil_image", data[0].user.perfil_image);
+                    window.localStorage.setItem("profile_views", data[0].user.profile_views);
+                    window.localStorage.setItem("profile_views", data[0].user.profile_views);
+                    window.localStorage.setItem("profile_views", data[0].user.profile_views);
+                    window.localStorage.setItem("user_id", data[0].user.user_id);
+                    window.localStorage.setItem("username", data[0].user.username);
+
                     btnLogin.removeAttribute("disabled");
                     btnLogin.innerHTML = `LOGIN`
+                    console.log(data);
                     this.$router.push("/feed");
+                } else {
+                    this.notUser = true;
+                    console.log('Usuario não encontrado');
+                    document.querySelector("i").setAttribute("color", "red");
+                    btnLogin.removeAttribute("disabled");
+                    btnLogin.innerHTML = `LOGIN`
                 }
+                return data;
             } catch (error) {
-                this.notUser = true;
-                console.log('Usuario não encontrado');
-                document.querySelector("i").setAttribute("color", "red");
-                btnLogin.removeAttribute("disabled");
-                btnLogin.innerHTML = `LOGIN`
+                console.error(error);
+                throw error;
             }
         }
     }
@@ -82,7 +99,8 @@ export default {
     justify-content: center;
     width: 20rem;
 }
-.alert_notUser{
+
+.alert_notUser {
     color: #ff5656;
 }
 </style>

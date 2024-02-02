@@ -7,8 +7,8 @@
             </InputGroupAddon>
             <InputText placeholder="Search" />
         </InputGroup>
-        <Menubar :model="items" />
-        <p class="fakeLink" href="">Try Premium for Free</p>    
+        <Menubar class="menuBar" :model="items" />
+        <p class="fakeLink" href="">Try Premium for Free</p>
     </div>
 </template>
 
@@ -25,7 +25,10 @@ export default {
             items: ([
                 {
                     label: 'Home',
-                    icon: 'pi pi-home'
+                    icon: 'pi pi-home',
+                    command: () => {
+                        this.$router.push("/feed");
+                    }
                 },
                 {
                     label: 'Message',
@@ -41,14 +44,16 @@ export default {
                         },
                         {
                             label: 'Profile',
-                            icon: 'pi pi-user-edit'
+                            icon: 'pi pi-user-edit',
+                            command: () => {
+                                this.$router.push("/profile");
+                            }
                         },
                         {
                             label: 'Log out',
                             icon: 'pi pi-power-off',
                             command: () => {
-                                window.localStorage.removeItem("session_code");
-                                window.localStorage.removeItem("user_id");
+                                window.localStorage.clear();
                                 this.$router.push("/");
                             }
                         },
@@ -67,26 +72,31 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.container {
     background: var(--third-color);
     display: flex;
     height: 4rem;
     align-items: center;
     justify-content: space-around;
 }
-.pi-prime{
+
+.pi-prime {
     font-size: 2rem;
-    margin: 0 1rem;
+    margin: 0 1rem 0 2rem;
 }
-.inputGroup{
+
+.inputGroup {
     width: 20rem;
     margin-right: auto;
 }
-.fakeLink{
+.menuBar{
+    border: none;
+}
+
+.fakeLink {
     color: var(--primary-color);
     padding: 0 0.3rem;
     margin: 0 1.5rem;
     border-left: 0.1rem solid var(--secondary-color);
     cursor: pointer;
-}
-</style>
+}</style>

@@ -76,9 +76,10 @@ export default {
 </script>
 
 <style scoped>
-
 .container{
-    margin-top: 4rem;
+    width: 55.7rem;
+    margin: auto;
+    margin-top: 5rem;
 }
 .icon{
     position: relative;

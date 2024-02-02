@@ -3,7 +3,7 @@
         <template #header>
             <div class="header">
                 <Avatar :image="post_user_perfil" shape="circle"></Avatar>
-                <span>{{ post_user_nome }}</span>
+                <span>{{ post_user_name }}</span>
             </div>
         </template>
         <template #icons>
@@ -50,7 +50,7 @@ export default {
     data() {
         return {
             name: "FeedCardsPosts",
-            post_user_nome: this.user,
+            post_user_name: this.user,
             post_user_perfil: this.perfil,
             post_user_text: this.content,
             post_user_date: this.post_date,

@@ -23,7 +23,6 @@
 <script>
 import Editor from 'primevue/editor';
 import Button from 'primevue/button';
-import { set_posts } from '@/services/setposts';
 
 export default {
     data() {
@@ -32,7 +31,6 @@ export default {
             textPost: "",
             errorPost: false,
             sucessPost: false,
-            user_id: localStorage.getItem("user_id"),
         }
     },
     components: {
@@ -40,31 +38,43 @@ export default {
         Button,
     },
     methods: {
-        onSubmit() {
-            if(this.textPost === ""){
+        async onSubmit() {
+            if (this.textPost === "") {
                 this.errorPost = true;
                 this.sucessPost = false;
-            }else{
-                set_posts(this.user_id, this.textPost);
-                this.sucessPost = true;
-                this.errorPost = false;
+            } else {
+                const key = 'd6s809afdas89ffdsa7890'
+
+                const user_id = localStorage.user_id;
+                const textPost = this.textPost;
+
+                const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=set_post&user_id=${user_id}&content=${textPost}`
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error('Failed to respost')
+                    }
+                    this.sucessPost = true;
+                    this.errorPost = false;
+                    console.log(response);
+                    this.$emit("postSend");
+                } catch (error) {
+                    console.error(error);
+                    throw error;
+                }
             }
         }
-    },
-    props: {
-        posts_details:{
-            type: Function,
-            required: true,
-        },
     }
 }
 </script>
 
 <style scoped>
-.title-new-post{
+.title-new-post {
     margin: 0 0 0.5rem 0.3rem;
     font-size: 1.3rem;
 }
+
 .container-new-post {
     display: flex;
     flex-direction: column;
@@ -72,23 +82,28 @@ export default {
     padding: 1rem;
     border-radius: 10px;
 }
-.container-new-post h1{
+
+.container-new-post h1 {
     font-size: 1.5rem;
     margin-bottom: 0.3rem;
 }
-.btn-submit{
+
+.btn-submit {
     display: flex;
     margin-top: 1rem;
     justify-content: space-between;
     align-items: center;
 }
-.p-sucess{
+
+.p-sucess {
     color: var(--primary-color);
 }
-.p-error{
+
+.p-error {
     color: var(--secondary-color);
 }
-.alert{
+
+.alert {
     font-size: 1.1rem;
 }
 </style>

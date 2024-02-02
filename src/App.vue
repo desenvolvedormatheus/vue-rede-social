@@ -20,8 +20,6 @@
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  height: 100vh;
   overflow-x: hidden;
 }
 

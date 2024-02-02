@@ -8,10 +8,11 @@
       <FeedProfile></FeedProfile>
 
       <div class="mid">
-        <FeedNewPost :posts_details="posts_details"></FeedNewPost>
+        <FeedNewPost @postSend="posts_details"></FeedNewPost>
         <ul id="feedPosts">
-          <li v-for="post in posts" :key="post.user">
-            <FeedCardsPosts :user="post.user" :perfil="post.perfil" :content="post.content" :post_date="post.post_date">
+          <li v-for="post in posts" :key="post.post_id">
+            <FeedCardsPosts :user="post.username" :perfil="post.perfil_image" :content="post.content"
+              :post_date="post.post_date">
             </FeedCardsPosts>
           </li>
         </ul>
@@ -30,15 +31,11 @@
 </template>
 
 <script>
-import { get_posts } from '@/services/getposts';
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import FeedProfile from '@/components/FeedProfile.vue';
 import FeedNewPost from '@/components/feedNewPost.vue';
 import FeedCardsPosts from '@/components/FeedCardsPosts.vue';
 import FeedNews from '@/components/FeedNews.vue';
-
-// API
-import { check_session } from '@/services/checksession';
 
 export default {
   data() {
@@ -54,31 +51,42 @@ export default {
     FeedNews,
   },
   methods: {
-    async checkUser(server_session) {
+    async checkUser(session_code) {
+      const key = 'd6s809afdas89ffdsa7890'
+
       try {
-        const session_server = await check_session(server_session);
-        console.log("Usuário autorizado");
-      } catch (error) {
-        console.log("Usuário não autorizado");
-      }
-    },
-    async posts_details() {
-      try {
-        const posts_details = await get_posts();
-        this.posts.pop();
-        for (let _i = 0; _i < posts_details.length; _i++) {
-          this.posts.push(
-            {
-              user: posts_details[_i].username,
-              perfil: posts_details[_i].perfil_image,
-              post_date: posts_details[_i].post_date,
-              content: posts_details[_i].content,
-            },
-          )
+        const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=chek_session&session_code=${session_code}`
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to resposta');
+        }
+        const data = await response.json();
+        if(data[0].have){
+          console.log("Usuário existente");
+        }else{
+          console.log("Usuário inexistente");
+          this.$router.push("/notLogin");
         }
       } catch (error) {
-        console.log('posts não encontrados');
-        console.log(error);
+        console.error(error);
+        throw error;
+      }
+
+    },
+    async posts_details() {
+      const key = 'd6s809afdas89ffdsa7890'
+      const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=get_posts`
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to resposta')
+        }
+        const data = await response.json();
+        this.posts = data;
+      } catch (error) {
+        console.error(error);
+        throw error;
       }
     }
   },
