@@ -4,7 +4,7 @@
 
         <main class="container-profile-main">
 
-            <div class="card-perfil"></div>
+            <ProfileCardProfileVue></ProfileCardProfileVue>
             <div class="card-sobre"></div>
             <div class="card-atividade"></div>
 
@@ -25,7 +25,7 @@ export default{
     },
     components:{
         FeedNavbar,
-        ProfileCardProfileVue
+        ProfileCardProfileVue,
     }
 }
 </script>
@@ -34,5 +34,7 @@ export default{
 .container-profile-main{
     display: flex;
     gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
 }
 </style>

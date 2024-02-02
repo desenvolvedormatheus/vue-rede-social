@@ -68,6 +68,7 @@ export default {
                     window.localStorage.setItem("profile_views", data[0].user.profile_views);
                     window.localStorage.setItem("user_id", data[0].user.user_id);
                     window.localStorage.setItem("username", data[0].user.username);
+                    window.localStorage.setItem("city", data[0].user.city);
 
                     btnLogin.removeAttribute("disabled");
                     btnLogin.innerHTML = `LOGIN`
