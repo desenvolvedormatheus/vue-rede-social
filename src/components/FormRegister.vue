@@ -88,7 +88,7 @@ export default {
                     console.log('erro, contate o administrador! ' + error);
                     this.alertShowCreate = false
                     this.alertShow = true
-                    this.alert = 'contate o administrador!'
+                    this.alert = 'Contate o administrador!'
                     btnCreate.removeAttribute("disabled");
                     btnCreate.innerHTML = `CREATE`
                 }

@@ -53,6 +53,7 @@ export default {
                 const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=get_users&user=${inputUser}&pass=${inputPass}`
 
                 const response = await fetch(url);
+
                 if (!response.ok) {
                     throw new Error('Failed to resposta')
                 }
@@ -82,9 +83,11 @@ export default {
                     btnLogin.innerHTML = `LOGIN`
                 }
                 return data;
-            } catch (error) {
-                console.error(error);
-                throw error;
+            } catch (err) {
+                console.log(err);
+                this.notUser = true;
+                btnLogin.removeAttribute("disabled");
+                btnLogin.innerHTML = `LOGIN`
             }
         }
     }
