@@ -55,7 +55,7 @@ export default {
       const key = 'd6s809afdas89ffdsa7890'
 
       try {
-        const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=chek_session&session_code=${session_code}`
+        const url = `http://localhost/API/api.php?key=${key}&action=chek_session&session_code=${session_code}`
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Failed to resposta');
@@ -75,7 +75,7 @@ export default {
     },
     async posts_details() {
       const key = 'd6s809afdas89ffdsa7890'
-      const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=get_posts`
+      const url = `http://localhost/API/api.php?key=${key}&action=get_posts`
 
       try {
         const response = await fetch(url);

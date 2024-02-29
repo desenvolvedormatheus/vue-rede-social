@@ -48,7 +48,7 @@ export default {
                 const user_id = localStorage.user_id;
                 const textPost = this.textPost;
 
-                const url = `http://localhost/apiRedeSocial/API/api.php?key=${key}&action=set_post&user_id=${user_id}&content=${textPost}`
+                const url = `http://localhost/API/api.php?key=${key}&action=set_post&user_id=${user_id}&content=${textPost}`
 
                 try {
                     const response = await fetch(url);
