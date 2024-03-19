@@ -50,26 +50,34 @@ export default {
 
             const key = 'd6s809afdas89ffdsa7890'
             try {
-                const url = `http://localhost:9090/api.php?key=${key}&action=get_users&user=${inputUser}&pass=${inputPass}`
 
-                const response = await fetch(url);
+                const options = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ key: 'd6s809afdas89ffdsa7890', user: inputUser, pass: inputPass })
+                };
+
+                const url = 'http://localhost:9000/get_users.php'
+
+                const response = await fetch(url, options);
 
                 if (!response.ok) {
                     throw new Error('Failed to resposta')
                 }
+
                 const data = await response.json();
-                if (data[0].log === true) {
-                    window.localStorage.setItem("session_code", data[0].user.session_code);
-                    window.localStorage.setItem("connections", data[0].user.connections);
-                    window.localStorage.setItem("description", data[0].user.description);
-                    window.localStorage.setItem("img_background", data[0].user.img_background);
-                    window.localStorage.setItem("perfil_image", data[0].user.perfil_image);
-                    window.localStorage.setItem("profile_views", data[0].user.profile_views);
-                    window.localStorage.setItem("profile_views", data[0].user.profile_views);
-                    window.localStorage.setItem("profile_views", data[0].user.profile_views);
-                    window.localStorage.setItem("user_id", data[0].user.user_id);
-                    window.localStorage.setItem("username", data[0].user.username);
-                    window.localStorage.setItem("city", data[0].user.city);
+                console.log(data)
+
+                if (data.log === "true") {
+                    window.localStorage.setItem("connections", data.user.connections);
+                    window.localStorage.setItem("description", data.user.description);
+                    window.localStorage.setItem("img_background", data.user.img_background);
+                    window.localStorage.setItem("perfil_image", data.user.perfil_image);
+                    window.localStorage.setItem("profile_views", data.user.profile_views);
+                    window.localStorage.setItem("user_id", data.user.user_id);
+                    window.localStorage.setItem("username", data.user.username);
+                    window.localStorage.setItem("city", data.user.city);
+                    window.localStorage.setItem("log", true);
 
                     btnLogin.removeAttribute("disabled");
                     btnLogin.innerHTML = `LOGIN`

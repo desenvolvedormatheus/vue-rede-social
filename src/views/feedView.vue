@@ -51,48 +51,39 @@ export default {
     FeedNews,
   },
   methods: {
-    async checkUser(session_code) {
-      const key = 'd6s809afdas89ffdsa7890'
+    async checkUser() {
 
-      try {
-        const url = `http://localhost/API/api.php?key=${key}&action=chek_session&session_code=${session_code}`
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Failed to resposta');
-        }
-        const data = await response.json();
-        if(data[0].have){
-          console.log("Usuário existente");
-        }else{
-          console.log("Usuário inexistente");
-          this.$router.push("/notLogin");
-        }
-      } catch (error) {
-        console.error(error);
-        throw error;
+      const log = window.localStorage.log;
+      console.log("log::: " + log)
+
+      if (log == "true") {
+        console.log("Usuário existente");
+      } else {
+        console.log("Usuário inexistente");
+        this.$router.push("/notLogin");
       }
 
     },
-    async posts_details() {
-      const key = 'd6s809afdas89ffdsa7890'
-      const url = `http://localhost/API/api.php?key=${key}&action=get_posts`
+     async posts_details() {
+       const key = 'd6s809afdas89ffdsa7890'
+       const url = `http://localhost/API/api.php?key=${key}&action=get_posts`
 
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Failed to resposta')
-        }
-        const data = await response.json();
-        this.posts = data;
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    }
+       try {
+         const response = await fetch(url);
+         if (!response.ok) {
+           throw new Error('Failed to resposta')
+         }
+         const data = await response.json();
+         this.posts = data;
+       } catch (error) {
+         console.error(error);
+         throw error;
+       }
+     }
   },
   mounted() {
     document.getElementById("app").style.margin = '0';
-    this.checkUser(window.localStorage.session_code);
+    this.checkUser();
     this.posts_details();
   }
 }
