@@ -50,7 +50,7 @@ export default {
 
             const key = 'd6s809afdas89ffdsa7890'
             try {
-                const url = `http://localhost/API/api.php?key=${key}&action=get_users&user=${inputUser}&pass=${inputPass}`
+                const url = `http://localhost:9090/api.php?key=${key}&action=get_users&user=${inputUser}&pass=${inputPass}`
 
                 const response = await fetch(url);
 
