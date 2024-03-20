@@ -48,7 +48,6 @@ export default {
             btnLogin.setAttribute("disabled", "");
             btnLogin.innerHTML = `<i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>`
 
-            const key = 'd6s809afdas89ffdsa7890'
             try {
 
                 const options = {
@@ -66,7 +65,6 @@ export default {
                 }
 
                 const data = await response.json();
-                console.log(data)
 
                 if (data.log === "true") {
                     window.localStorage.setItem("connections", data.user.connections);

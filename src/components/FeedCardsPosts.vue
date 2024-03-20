@@ -12,9 +12,8 @@
         <p class="text-post" v-html="post_user_text"></p>
         <template #footer>
             <div class="footer">
-                <i class="pi pi-heart"></i>
-                <i class="pi pi-share-alt"></i>
-                <i class="pi pi-bookmark"></i>
+                <i class="pi pi-heart"><p class="likes">{{ likes }}</p></i>
+                <i class="pi pi-bookmark"><p class="favorites">0</p></i>
             </div>
         </template>
     </Panel>
@@ -45,6 +44,11 @@ export default {
             type: String,
             required: true,
             default: "00-00-00 00:00:00"
+        },
+        likes: {
+            type: String,
+            required: true,
+            default: "0"
         }
     },
     data() {
@@ -72,20 +76,19 @@ export default {
     align-items: center;
     gap: 1rem;
 }
-
+.hour {
+    color: #666666;
+}
 .text-post {
     text-align: justify;
 }
-
 .footer {
     display: flex;
     gap: 1rem;
 }
-
 .footer i {
     cursor: pointer;
+    display: flex;
+    gap: 0.4rem;
 }
-
-.hour {
-    color: #666666;
-}</style>
+</style>

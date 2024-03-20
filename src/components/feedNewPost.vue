@@ -13,7 +13,7 @@
             </Editor>
             <div class="btn-submit">
                 <Button type="submit" label="Submit"></Button>
-                <small class="alert p-error" v-show="errorPost">Cannot be empty!</small>
+                <small class="alert p-error" v-show="errorPost">{{ textError }}</small>
                 <small class="alert p-sucess" v-show="sucessPost">Shared!</small>
             </div>
         </form>
@@ -25,10 +25,16 @@ import Editor from 'primevue/editor';
 import Button from 'primevue/button';
 
 export default {
+    props:{
+        getposts: {
+            type: Function,
+        },
+    },
     data() {
         return {
             name: "FeedNewPost",
             textPost: "",
+            textError: "",
             errorPost: false,
             sucessPost: false,
         }
@@ -41,24 +47,38 @@ export default {
         async onSubmit() {
             if (this.textPost === "") {
                 this.errorPost = true;
+                this.textError = "Cannot be empty!"
                 this.sucessPost = false;
             } else {
-                const key = 'd6s809afdas89ffdsa7890'
-
-                const user_id = localStorage.user_id;
-                const textPost = this.textPost;
-
-                const url = `http://localhost/API/api.php?key=${key}&action=set_post&user_id=${user_id}&content=${textPost}`
-
                 try {
-                    const response = await fetch(url);
+
+                    const options = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({ key: 'd6s809afdas89ffdsa7890', user_id: localStorage.user_id, content: this.textPost })
+                    };
+
+                    const url = 'http://localhost:9000/set_post.php';
+
+                    const response = await fetch(url, options);
+
                     if (!response.ok) {
-                        throw new Error('Failed to respost')
+                        throw new Error('Failed to resposta');
                     }
-                    this.sucessPost = true;
-                    this.errorPost = false;
-                    console.log(response);
-                    this.$emit("postSend");
+
+                    const data = await response.json();
+                    if(data){
+                        this.sucessPost = true;
+                        this.errorPost = false;
+                        this.$emit("postSend");
+                        this.textPost = "";
+                        this.getposts();
+                        
+                    }else{
+                        this.errorPost = true;
+                        this.textError = "Erro[QRY_001], Contate o administrador!";
+                    }
+                    
                 } catch (error) {
                     console.error(error);
                     throw error;

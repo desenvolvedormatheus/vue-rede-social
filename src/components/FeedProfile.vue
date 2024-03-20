@@ -20,7 +20,7 @@
             <hr>
             <div class="info fakeLink">
                 <i class="pi pi-bookmark-fill"></i>
-                <p>My itens</p>
+                <p>My favorites</p>
             </div>
         </div>
     </div>
@@ -34,11 +34,11 @@ export default {
             name: "FeedProfile",
             user: {
                 imgBackground: "",
-                imgProfile: "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
+                imgProfile: "",
                 name: "",
                 description: "",
-                profile_views: "",
-                connections: "",
+                profile_views: "0",
+                connections: "0",
             }
         }
     },

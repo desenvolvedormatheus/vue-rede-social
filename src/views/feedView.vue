@@ -8,11 +8,11 @@
       <FeedProfile></FeedProfile>
 
       <div class="mid">
-        <FeedNewPost @postSend="posts_details"></FeedNewPost>
+        <FeedNewPost :getposts="posts_details"></FeedNewPost>
         <ul id="feedPosts">
           <li v-for="post in posts" :key="post.post_id">
             <FeedCardsPosts :user="post.username" :perfil="post.perfil_image" :content="post.content"
-              :post_date="post.post_date">
+              :post_date="post.post_date" :likes="post.likes">
             </FeedCardsPosts>
           </li>
         </ul>
@@ -54,7 +54,6 @@ export default {
     async checkUser() {
 
       const log = window.localStorage.log;
-      console.log("log::: " + log)
 
       if (log == "true") {
         console.log("Usuário existente");
@@ -64,22 +63,32 @@ export default {
       }
 
     },
-     async posts_details() {
-       const key = 'd6s809afdas89ffdsa7890'
-       const url = `http://localhost/API/api.php?key=${key}&action=get_posts`
+    async posts_details() {
+      try {
+        const options = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ key: 'd6s809afdas89ffdsa7890' })
+        };
 
-       try {
-         const response = await fetch(url);
-         if (!response.ok) {
-           throw new Error('Failed to resposta')
-         }
-         const data = await response.json();
-         this.posts = data;
-       } catch (error) {
-         console.error(error);
-         throw error;
-       }
-     }
+        const url = 'http://localhost:9000/get_posts.php'
+
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+          console.log('Failed to resposta (GET_POSTS feedview)')
+        }
+
+        const data = await response.json();
+        this.posts = data
+
+        window.localStorage.posts
+
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
   },
   mounted() {
     document.getElementById("app").style.margin = '0';
@@ -90,9 +99,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 100vw;
-}
 
 .container-main {
   display: flex;
