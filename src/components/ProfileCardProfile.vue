@@ -104,9 +104,11 @@ export default {
 .image-profile {
     filter: drop-shadow(0.2rem 0.3rem 0.1rem #00000048);
     height: 300px;
+    width: 800px;
 }
 
 .image-profile {
+    width: 200px;
     height: 200px;
     border-radius: 100%;
     position: absolute;

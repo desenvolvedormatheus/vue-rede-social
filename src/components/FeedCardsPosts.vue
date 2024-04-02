@@ -33,7 +33,7 @@ export default {
         perfil: {
             type: String,
             required: true,
-            default: "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"
+            default: ""
         },
         content: {
             type: String,
