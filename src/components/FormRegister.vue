@@ -61,8 +61,8 @@ export default {
             // checar confirmação de senha
             if (this.inputPassConform === this.inputPass) {
                 try {
-                    const user = this.set_users(inputUser, inputPass);
-                    console.log(user);
+                    const user = await this.set_users(inputUser, inputPass);
+                    console.log("usuário " + user.have);
                     if (user.have === 'true') {
                         this.alertShowCreate = false
                         this.alertShow = true
@@ -74,7 +74,7 @@ export default {
                         this.alertShow = false
                         btnCreate.removeAttribute("disabled");
                         btnCreate.innerHTML = `CREATE`
-                    } else if (user.have === 'empy') {
+                    } else if (user.error0 === 'Parâmetros vazios!') {
                         this.alertShowCreate = false
                         this.alertShow = true
                         this.alert = 'Usuário ou senha não podem estar vazios!'
@@ -98,14 +98,21 @@ export default {
         },
         async set_users(user, pass) {
             try {
-                const url = `http://localhost:9090/api.php?key=d6s809afdas89ffdsa7890&action=set_users&user=${user}&pass=${pass}`
+                const options = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ key: 'd6s809afdas89ffdsa7890', user: user, pass: pass })
+                };
 
-                const response = await fetch(url);
+                const url = 'http://localhost:9000/set_user.php'
+
+                const response = await fetch(url, options);
+
                 if (!response.ok) {
-                    throw new Error('Failed to respost')
+                    console.log('Failed to respost');
                 }
-                const data = await response.json();
-                return data;
+
+                return response.json()
             } catch (error) {
                 console.error(error);
                 throw error;

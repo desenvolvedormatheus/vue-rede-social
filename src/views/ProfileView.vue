@@ -34,7 +34,8 @@ export default{
 .container-profile-main{
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
     margin-top: 2rem;
+    flex-direction: column;
 }
 </style>

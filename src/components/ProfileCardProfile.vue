@@ -38,11 +38,13 @@
                         </li>
                         <li class="edit-profile-main">
                             <strong>Profile image:</strong>
-                            <FileUpload mode="basic" name="prifile_image" url="/api/upload/profile" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
+                            <InputText placeholder="Link" class="InputText" />
+                            <Button label="Alterar" class="btnAlter-main"></Button>
                         </li>
                         <li class="edit-profile-main">
                             <strong>Background image:</strong>
-                            <FileUpload mode="basic" name="prifile_image" url="/api/upload/profile" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
+                            <InputText placeholder="Link" class="InputText" />
+                            <Button label="Alterar" class="btnAlter-main"></Button>
                         </li>
                         <li class="edit-profile-main">
                             <InputText placeholder="Alter City" class="InputText" v-model="alterCity" />
@@ -59,7 +61,6 @@
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Editor from 'primevue/editor';
-import FileUpload from 'primevue/fileupload';
 
 export default {
     data() {
@@ -140,7 +141,6 @@ export default {
         Button,
         InputText,
         Editor,
-        FileUpload,
     }
 }
 </script>
@@ -188,6 +188,11 @@ export default {
 .description {
     text-align: justify;
 }
+.info-main{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
 .info-main h1 {
     font-size: 1.5rem;
@@ -195,7 +200,7 @@ export default {
 }
 
 .InputText {
-    width: 70%;
+    width: 100%;
 }
 
 .btnAlter-main {
@@ -205,8 +210,11 @@ export default {
 .edit-profile-main {
     display: flex;
     gap: 0.3rem;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: end;
+    background: #617390;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
 }
 
 .info-main ul {
