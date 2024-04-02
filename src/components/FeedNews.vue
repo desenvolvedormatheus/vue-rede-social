@@ -18,7 +18,7 @@ export default {
         return{
             name: 'FeedNews',
             textUpdate: [
-                "Agora voces pode criar posts que ficarão visíveis a todos os usuários!",
+                "Now you can create posts that will be visible to all users!",
             ]
         }
     }

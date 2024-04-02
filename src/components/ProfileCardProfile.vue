@@ -3,65 +3,16 @@
         <img :src="user.imgBackground" alt="image background profile" class="image-background">
         <img :src="user.imgProfile" alt="image profile" class="image-profile">
         <div class="profile-details">
-            <div class="details">
-                <div class="info-main">
-                    <h1>{{ user.name }}</h1>
-                    <p class="description"><strong>Description:</strong><br>{{ user.description }}</p>
-                    <p><strong>City:</strong><br>{{ user.city }}</p>
-                    <p><strong>Profile views:</strong><br>{{ user.profile_views }}</p>
-                    <p><strong>Connections:</strong><br>{{ user.connections }}</p>
-                </div>
-            </div>
-            <div class="details">
-                <div class="info-main">
-                    <h1>Edit profile</h1>
-                    <ul>
-                        <li class="edit-profile-main">
-                            <InputText placeholder="Username" class="InputText" v-model="alterUsername" />
-                            <Button label="Alterar" class="btnAlter-main"></Button>
-                        </li>
-                        <li class="edit-profile-main">
-                            <InputText placeholder="Password" class="InputText" v-model="alterPassword" />
-                            <Button label="Alterar" class="btnAlter-main"></Button>
-                        </li>
-                        <li class="edit-profile-description">
-                            <Editor v-model="alterDescription" editorStyle="height: 120px" placeholder="Alter description">
-                                <template v-slot:toolbar>
-                                    <span class="ql-formats">
-                                        <button v-tooltip.bottom="'Bold'" class="ql-bold"></button>
-                                        <button v-tooltip.bottom="'Italic'" class="ql-italic"></button>
-                                        <button v-tooltip.bottom="'Underline'" class="ql-underline"></button>
-                                    </span>
-                                </template>
-                            </Editor>
-                            <Button label="Alterar"></Button>
-                        </li>
-                        <li class="edit-profile-main">
-                            <strong>Profile image:</strong>
-                            <InputText placeholder="Link" class="InputText" />
-                            <Button label="Alterar" class="btnAlter-main"></Button>
-                        </li>
-                        <li class="edit-profile-main">
-                            <strong>Background image:</strong>
-                            <InputText placeholder="Link" class="InputText" />
-                            <Button label="Alterar" class="btnAlter-main"></Button>
-                        </li>
-                        <li class="edit-profile-main">
-                            <InputText placeholder="Alter City" class="InputText" v-model="alterCity" />
-                            <Button label="Alterar" class="btnAlter-main"></Button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <h1>{{ user.name }}</h1>
+            <p><strong>Description</strong><br>{{ user.description }}</p>
+            <p><strong>City</strong><br>{{ user.city }}</p>
+            <p><strong>Profile views</strong><br>{{ user.profile_views }}</p>
+            <p><strong>Connections</strong><br>{{ user.connections }}</p>
         </div>
     </div>
 </template>
 
 <script>
-import Button from 'primevue/button';
-import InputText from 'primevue/inputtext';
-import Editor from 'primevue/editor';
-
 export default {
     data() {
         return {
@@ -75,10 +26,6 @@ export default {
                 connections: "",
                 city: "",
             },
-            alterUsername: localStorage.username,
-            alterDescription: localStorage.description,
-            alterPassword: "",
-            alterCity: localStorage.city,
         }
     },
     methods: {
@@ -130,23 +77,17 @@ export default {
                 console.log('Usuario não encontrado');
             }
         },
-        onUpload(){
+        onUpload() {
             alert("subiu")
         }
     },
     mounted() {
         this.user_details()
     },
-    components: {
-        Button,
-        InputText,
-        Editor,
-    }
 }
 </script>
 
 <style scoped>
-/* Geral */
 .profile {
     display: flex;
     flex-direction: column;
@@ -155,7 +96,6 @@ export default {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    width: 800px;
     padding-bottom: 1.5rem;
 }
 
@@ -163,11 +103,11 @@ export default {
 .image-background,
 .image-profile {
     filter: drop-shadow(0.2rem 0.3rem 0.1rem #00000048);
-    height: 200px;
+    height: 300px;
 }
 
 .image-profile {
-    width: 200px;
+    height: 200px;
     border-radius: 100%;
     position: absolute;
     left: 1rem;
@@ -176,60 +116,13 @@ export default {
 
 /* detalhes */
 .profile-details {
-    padding: 0 1rem;
     display: flex;
-    justify-content: space-around;
-}
-
-.details {
-    width: 40%;
-}
-
-.description {
-    text-align: justify;
-}
-.info-main{
+    gap: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding: 0.5rem 0.5rem;
 }
 
-.info-main h1 {
-    font-size: 1.5rem;
-    padding-top: 1rem;
-}
-
-.InputText {
-    width: 100%;
-}
-
-.btnAlter-main {
-    width: 30%;
-}
-
-.edit-profile-main {
-    display: flex;
-    gap: 0.3rem;
-    flex-direction: column;
-    align-items: end;
-    background: #617390;
-    padding: 0.3rem;
-    border-radius: 0.3rem;
-}
-
-.info-main ul {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.info-main p {
-    padding: 0.5rem 0;
-}
-
-.edit-profile-description {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.profile-details p {
+    max-width: 20rem;
 }
 </style>
