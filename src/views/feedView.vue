@@ -103,6 +103,7 @@ export default {
 .container-main {
   display: flex;
   justify-content: space-around;
+  align-items: start;
   margin-top: 1rem;
 }
 

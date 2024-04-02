@@ -5,7 +5,9 @@
         <div class="profile-details">
             <div class="info">
                 <p>{{ user.name }}</p>
-                <p class="description">{{ user.description }}</p>
+            </div>
+            <div class="info">
+                <p>{{ user.description }}</p>
             </div>
             <hr>
             <div class="info">
@@ -103,7 +105,6 @@ export default {
     border-radius: 10px;
     overflow: hidden;
     width: 300px;
-    height: 400px;
 }
 
 /* imagens */
@@ -131,7 +132,7 @@ export default {
     justify-content: space-between;
     padding: 1rem 0;
     gap: 1rem;
-    text-align: end;
+    text-align: justify;
 }
 
 /* extra */
@@ -139,4 +140,3 @@ export default {
     cursor: pointer;
 }
 </style>
-<!-- todas as infos de user{} virão do banco -->
