@@ -26,6 +26,11 @@ const routes = [
     path: '/Error',
     name: 'Error',
     component: () => import('../views/ErrorView.vue')
+  },
+  {
+    path: '/Config',
+    name: 'Config',
+    component: () => import('../views/ConfigView.vue')
   }
 ]
 

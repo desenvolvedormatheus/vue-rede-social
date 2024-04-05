@@ -5,7 +5,6 @@
         <main class="container-profile-main">
 
             <ProfileCardProfileVue></ProfileCardProfileVue>
-            <ProfileCardEditVue></ProfileCardEditVue>
 
         </main>
 
@@ -15,28 +14,25 @@
 <script>
 import FeedNavbar from '@/components/FeedNavbar.vue';
 import ProfileCardProfileVue from '@/components/ProfileCardProfile.vue';
-import ProfileCardEditVue from '@/components/ProfileCardEdit.vue'
 
-export default{
-    data(){
-        return{
+export default {
+    data() {
+        return {
             name: "ProfileView",
         }
     },
-    components:{
+    components: {
         FeedNavbar,
         ProfileCardProfileVue,
-        ProfileCardEditVue,
     }
 }
 </script>
 
 <style scoped>
-.container-profile-main{
+.container-profile-main {
     display: flex;
-    gap: 1rem;
-    align-items: center;
     flex-direction: column;
-    padding: 2rem;
+    align-items: center;
+    margin-top: 1rem;
 }
 </style>

@@ -40,7 +40,10 @@ export default {
                     items: [
                         {
                             label: 'Settings',
-                            icon: 'pi pi-cog'
+                            icon: 'pi pi-cog',
+                            command: () => {
+                                this.$router.push("/Config");
+                            }
                         },
                         {
                             label: 'Profile',

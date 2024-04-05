@@ -71,15 +71,12 @@ export default {
     border-radius: 10px;
     color: #af2c2c;
 }
-
 .edit-profile {
     border: 1px solid #af2c2c;
 }
-
 .InputText {
     width: 23rem;
 }
-
 .edit-profile-main {
     display: flex;
     gap: 0.3rem;

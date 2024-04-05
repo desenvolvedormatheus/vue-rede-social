@@ -24,9 +24,7 @@
 
     </main>
 
-    <footer class="feed-container-footer">
-      <p><i>By - Matheus Souza</i></p>
-    </footer>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -36,6 +34,7 @@ import FeedProfile from '@/components/FeedProfile.vue';
 import FeedNewPost from '@/components/feedNewPost.vue';
 import FeedCardsPosts from '@/components/FeedCardsPosts.vue';
 import FeedNews from '@/components/FeedNews.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
   data() {
@@ -49,6 +48,7 @@ export default {
     FeedNewPost,
     FeedCardsPosts,
     FeedNews,
+    Footer
   },
   methods: {
     async checkUser() {
