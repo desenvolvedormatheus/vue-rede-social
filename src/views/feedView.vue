@@ -99,7 +99,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container-main {
   display: flex;
   justify-content: space-around;

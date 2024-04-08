@@ -31,37 +31,27 @@ export default {
                     }
                 },
                 {
-                    label: 'Message',
-                    icon: 'pi pi-comments'
+                    label: 'Profile',
+                    icon: 'pi pi-user-edit',
+                    command: () => {
+                        this.$router.push("/profile");
+                    }
                 },
                 {
-                    label: 'My user',
-                    icon: 'pi pi-user',
-                    items: [
-                        {
-                            label: 'Settings',
-                            icon: 'pi pi-cog',
-                            command: () => {
-                                this.$router.push("/Config");
-                            }
-                        },
-                        {
-                            label: 'Profile',
-                            icon: 'pi pi-user-edit',
-                            command: () => {
-                                this.$router.push("/profile");
-                            }
-                        },
-                        {
-                            label: 'Log out',
-                            icon: 'pi pi-power-off',
-                            command: () => {
-                                window.localStorage.clear();
-                                this.$router.push("/");
-                            }
-                        },
-                    ]
+                    label: 'Settings',
+                    icon: 'pi pi-cog',
+                    command: () => {
+                        this.$router.push("/Config");
+                    }
                 },
+                {
+                    label: 'Log out',
+                    icon: 'pi pi-power-off',
+                    command: () => {
+                        window.localStorage.clear();
+                        this.$router.push("/");
+                    }
+                }   
             ])
         }
     },
